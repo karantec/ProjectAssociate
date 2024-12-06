@@ -1,189 +1,58 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const InteriorDataSchema = new mongoose.Schema({
   title: {
-    type: String
+    type: String,
   },
   clientName: {
-    type: String
+    type: String,
   },
   projectType: {
-    type: String
+    type: String,
   },
   siteAddress: {
-    type: String
+    type: String,
   },
   gstNo: {
-    type: String
+    type: String,
   },
   mahareraNo: {
-    type: String
+    type: String,
   },
   projectHead: {
-    type: String
+    type: String,
   },
   rccDesignerName: {
-    type: String
+    type: String,
   },
   Pan: {
-    type: String
+    type: String,
   },
   Aadhar: {
-    type: String
+    type: String,
   },
   Pin: {
-    type: String
+    type: String,
   },
   email: {
-    type: String
+    type: String,
   },
-  Floor_Plan_1: {
-    type: String
-  },
-  Floor_Plan_2: {
-    type: String
-  },
- Floor_Plan_3: {
-    type: String
-  },
-  Floor_Plan_4: {
-    type: String
-  },
-  Section_1: {
-    type: String
-  },
-  Section_2: {
-    type: String
-  },
-  Section_3: {
-    type: String
-  },
-  Section_4: {
-    type: String
-  },
-  All_Section: {
-    type: String
-  },
-  All_Elevation: {
-    type: String
-  },
-  Elevation_1: {
-    type: String
-  },
-  Elevation_2: {
-    type: String
-  },
-  Elevation_3: {
-    type: String
-  },
-  Elevation_4: {
-    type: String
-  },
- 
-  ThreeD_Model_1: {
-    type: String
-  },
-  ThreeD_Model_2: {
-    type: String
-  },
-  ThreeD_Model_3: {
-    type: String
-  },
-  ThreeD_Model_4: {
-    type: String
-  },
-  Detail_Working_Layout_1: {
-    type: String
-  },
-  Electrical_Layout_1: {
-    type: String
-  },
-  Electrical_Layout_2: {
-    type: String
-  },
-   Electrical_Layout_3: {
-    type: String
-  },
-  Celling_Layout_1: {
-    type: String
-  },
-  Celling_Layout_2: {
-    type: String
-  },
-//  Celling_Layout_3: {
-//        type: String
-//   },
-//   Celling_Layout_4: {
-//     type: String
-//   },
-//   PlumbingDetails_1: {
-//     type: String
-//   },
-//   PlumbingDetails_2: {
-//     type: String
-//   },
-//   Flooring_Details_1: {
-//     type: String
-//   },
-//  Flooring_Details_2: {
-//     type: String
-//   },
-//  Furniture_Details_1: {
-//     type: String
-//   },
-// Furniture_Details_2: {
-//     type: String
-//   },
-// Furniture_Details_3: {
-//     type: String
-//   },
-// Furniture_Details_4: {
-//     type: String
-//   },
-// Furniture_Details_5: {
-//     type: String
-//   },
-
-// Laminator_Venner_1: {
-//     type: String
-//   },
-// Laminator_Venner_2: {
-//     type: String
-//   },
-// Handles_Hardware_1: {
-//     type: String
-//   },
-// Handles_Hardware_2: {
-//     type: String
-//   },
-// Curtains_1: {
-//     type: String
-//   },
-// Curtains_2: {
-//     type: String
-//   },
-// Flooring_Details_1: {
-//     type: String
-//   },
-
-// Flooring_Details_2: {
-//     type: String
-//   },
-
-// Plumbing_Details_1: {
-//     type: String
-//   },
-// Plumbing_Details_2: {
-//     type: String
-//   },
-// Plumbing_Details_3: {
-//     type: String
-//   },
-
+  Floor_Plan: [String],
+  Section: [String],
+  Elevation: [String],
+  ThreeD_Model: [String],
+  Detail_Working: [String],
+  Flooring: [String],
+  Furniture: [String],
+  Presentation: [String],
+  Ceiling: [String],
+  Electrical: [String],
+  Plumbing: [String],
+  Estimate: [String],
+  Onsite: [String],
 });
-InteriorDataSchema.pre('save', async function (next) {
+InteriorDataSchema.pre("save", async function (next) {
   const InteriorDataSchema = this;
   next();
-})
-
+});
 
 module.exports = mongoose.model("InteriorDataSchema", InteriorDataSchema);

@@ -11,10 +11,10 @@ const {
 } = require('../controllers/InteriorController');
 
 // Route to create new interior data
-router.post('/interiors', handleUpload, createInteriorData);
+router.post('/interiors', createInteriorData);
 
 // Route to update existing interior data by ID
-router.put('/update/interiors/:id', handleUpload, updateInteriorData);
+router.put('/update/interiors/:id', updateInteriorData);
 
 // Route to delete interior data by ID
 router.delete('/interiors/:id', deleteInteriorData);

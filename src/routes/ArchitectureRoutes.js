@@ -4,10 +4,10 @@ const { handleUpload, createModalData, updateModalData, deleteModalData,
     getModalDataById, getModalData } = require('../controllers/ArchitectureController');
 
 // Route to create a new entry with image upload
-router.post('/upload', handleUpload, createModalData);
+router.post('/upload', createModalData);
 
 // Route to update existing modal data
-router.put('/update/:id', handleUpload, updateModalData);
+router.put('/update/:id', updateModalData);
 
 // Route to delete existing modal data
 router.delete('/upload/:id', deleteModalData);

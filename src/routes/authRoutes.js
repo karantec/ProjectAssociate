@@ -15,9 +15,9 @@ router.post('/verify', verify);
 router.post('/login', loginValidation, login);
 
 // Get all users (authenticated)
-router.get('/users', authenticateMiddleware, getUsers); 
+router.get('/users', getUsers); 
 //delete useer
-router.delete('/users/:id', authenticateMiddleware, deleteUser);
+router.delete('/users/:id', deleteUser);
 
 // Request password reset
 router.post('/forgot-password', forgotPassword);

@@ -98,68 +98,13 @@ const uploadToS3 = async (file, folder) => {
 
 const createInteriorData = async (req, res) => {
     try {
-        // Validate request
-        if (!req.files || Object.keys(req.files).length === 0) {
-            return res.status(400).json({
-                success: false,
-                error: 'No files uploaded. Please upload at least one file.'
-            });
-        }
-
-        if (!req.body.title) {
-            return res.status(400).json({
-                success: false,
-                error: 'Title is required'
-            });
-        }
-
-        // Prepare interior data
-        const interiorData = {
-            ...req.body,
-            createdAt: new Date(),
-            updatedAt: new Date()
-        };
-
-        // Upload files to S3
-        const uploadPromises = Object.entries(req.files).map(async ([fieldName, files]) => {
-            try {
-                const file = files[0];
-                const fileUrl = await uploadToS3(file, 'interior-uploads');
-                interiorData[fieldName] = fileUrl;
-                return { fieldName, status: 'success', url: fileUrl };
-            } catch (error) {
-                return { fieldName, status: 'error', error: error.message };
-            }
-        });
-
-        const uploadResults = await Promise.all(uploadPromises);
-        const failedUploads = uploadResults.filter(result => result.status === 'error');
-
-        if (failedUploads.length > 0) {
-            return res.status(500).json({
-                success: false,
-                error: 'Some files failed to upload',
-                details: failedUploads
-            });
-        }
-
-        // Save to database
-        const newInteriorData = await InteriorData.create(interiorData);
-
-        res.status(201).json({
-            success: true,
-            message: 'Upload successful',
-            data: newInteriorData,
-            uploadResults: uploadResults
-        });
-
+        const data = await req.body;
+        const interiorModel =  await new InteriorData(data);
+        await interiorModel.save();
+        console.log(interiorModel)
+        res.json({message:"Created"}).status(201)
     } catch (error) {
-        console.error('Server Error:', error);
-        res.status(500).json({
-            success: false,
-            error: 'Upload failed',
-            details: error.message
-        });
+        res.json({message:"error"}).status(500)
     }
 };
 
