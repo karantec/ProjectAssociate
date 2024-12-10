@@ -25,6 +25,6 @@ router.post('/forgot-password', forgotPassword);
 // Reset password
 router.post('/reset-password', resetPassword);
 
-router.delete('/users/:id',authenticateMiddleware,deleteUser);
+router.delete('/users/:id',deleteUser);
 
 module.exports = router;

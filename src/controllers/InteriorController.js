@@ -138,29 +138,10 @@ const updateInteriorData = async (req, res) => {
   
       // Prepare the update data, adding a new timestamp
       const updateData = { ...req.body, updatedAt: new Date() };
-  
-      // Process each file in the request
-      const uploadPromises = Object.entries(req.files || {}).map(async ([fieldName, files]) => {
-        const file = files[0];
-  
-        // Upload new file to S3
-        const fileUrl = await uploadToS3(file, 'interior-uploads');
-        updateData[fieldName] = fileUrl;
-  
-        // Delete the old file from S3 if it exists
-        const oldUrl = existingData[fieldName];
-        if (oldUrl) {
-          const oldKey = oldUrl.split(`${BUCKET_NAME}/`)[1];
-          if (oldKey) {
-            await s3.deleteObject({ Bucket: BUCKET_NAME, Key: oldKey }).promise();
-          }
-        }
-      });
-  
-      await Promise.all(uploadPromises);
-  
-      // Update the document in the database
-      const updatedInteriorData = await InteriorData.findByIdAndUpdate(id, updateData, { new: true });
+
+      console.log(updateData)
+
+      const updatedInteriorData = await InteriorData.findByIdAndUpdate(id, updateData);
   
       res.status(200).json({
         success: true,

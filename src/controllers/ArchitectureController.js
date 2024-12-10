@@ -568,34 +568,37 @@ const updateModalData = async (req, res) => {
             updatedAt: new Date(),
         };
 
-        // Handle file updates
-        if (req.files && Object.keys(req.files).length > 0) {
-            const uploadPromises = [];
-            for (const fieldName in req.files) {
-                const files = req.files[fieldName];
-                modalDataUpdates[fieldName] = [];
+        console.log(modalDataUpdates)
 
-                files.forEach((file) => {
-                    uploadPromises.push(
-                        uploadToS3(file, 'uploads')
-                            .then((fileUrl) => {
-                                modalDataUpdates[fieldName].push(fileUrl);
-                            })
-                            .catch((error) => {
-                                throw new Error(`Failed to upload ${fieldName}: ${error.message}`);
-                            }),
-                    );
-                });
-            }
-            await Promise.all(uploadPromises);
-        }
+
+        // Handle file updates
+        // if (req.files && Object.keys(req.files).length > 0) {
+        //     const uploadPromises = [];
+        //     for (const fieldName in req.files) {
+        //         const files = req.files[fieldName];
+        //         modalDataUpdates[fieldName] = [];
+
+        //         files.forEach((file) => {
+        //             uploadPromises.push(
+        //                 uploadToS3(file, 'uploads')
+        //                     .then((fileUrl) => {
+        //                         modalDataUpdates[fieldName].push(fileUrl);
+        //                     })
+        //                     .catch((error) => {
+        //                         throw new Error(`Failed to upload ${fieldName}: ${error.message}`);
+        //                     }),
+        //             );
+        //         });
+        //     }
+        //     await Promise.all(uploadPromises);
+        // }
 
         // Update data in MongoDB
-        const updatedModalData = await ModalData.findByIdAndUpdate(id, modalDataUpdates, { new: true });
+        const updatedModalData = await ModalData.findByIdAndUpdate(id, modalDataUpdates);
         if (!updatedModalData) {
             return res.status(404).json({ success: false, message: 'Data not found' });
         }
-
+        console.log(updateModalData)
         res.status(200).json({
             success: true,
             message: 'Data updated successfully',
