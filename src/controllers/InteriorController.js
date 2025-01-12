@@ -4,7 +4,7 @@ const InteriorData = require('../models/InteriorModel');
 const { v4: uuidv4 } = require('uuid');
 
 // AWS Configuration
-const BUCKET_NAME = 'interiorbucket1';
+const BUCKET_NAME = 'buildingbucket1';
 const AWS_REGION = 'ap-south-1';
 
 // Configure AWS
